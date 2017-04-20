@@ -1,0 +1,27 @@
+{
+  "name": "chatapp",
+  "version": "1.0.0",
+  "description": "demo socketio and mongodb",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "author": "LongLy",
+  "license": "ISC",
+  "dependencies": {
+    "express": "*",
+    "mongodb": "^2.2.26",
+    "socket.io": "*",
+    "socket.io-client": "^1.7.3"
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/longlh7/chatapp.git"
+  },
+  "bugs": {
+    "url": "https://github.com/longlh7/chatapp/issues"
+  },
+  "homepage": "https://github.com/longlh7/chatapp#readme"
+}
