@@ -4,55 +4,27 @@
       <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
       <script src="/socket.io/socket.io.js"></script>
       <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
-      <style>
-         #messageArea{
-           margin-top: 30px;
-          display: none;
-         }
-         #userFormArea {
-           margin-top: 200px;
-           text-align: center;
-         }
-         #login{
-           width: 12%;
-          margin-right: 30px;
-         }
-         #signup{
-           width: 12%;
-          background-color: green;
-         }
-         #username, #password {
-           text-align: center;
-         }
-         label {
-           width: 30%;
-         }
-         #err{
-           border: 0;
-           color: red;
-           text-align: center;
-           width: 100%;
-         }
-      </style>
+      <link rel="stylesheet" type="text/css" href="css/styles.css">
    </head>
    <body>
       <div class="container">
-         <div id="userFormArea" class=row>
+
+         <div id="loginFormArea" class=row>
            <h1>CHAP APP DEMO</h1>
             <br />
-            <form id="userForm" action="/validateUser">
+            <form id="loginForm">
                <label>
-               <input placeholder="Username" class="form-control" id="username" name="username"></input>
+               <input placeholder="Username" class="form-control" id="usernameLbl" name="username"></input>
                </label>
                <br />
                <br />
                <label>
-               <input type="password" placeholder="Password" class="form-control" id="password" name="password"></input>
+               <input type="password" placeholder="Password" class="form-control" id="passwordLbl" name="password"></input>
                </label>
                <br />
                <br />
-               <input type="submit" id="login" class="btn btn-primary" value="Login"/>
-               <input type="button" id="signup" class="btn btn-primary" value="Signup"/>
+               <input type="submit" id="loginBtn" class="btn btn-primary" value="Login"/>
+               <input type="button" id="signupBtn" class="btn btn-primary" value="Signup"/>
                <br />
                <br />
             </form>
@@ -69,85 +41,21 @@
             <div class="col-md-8">
                <form id="messageForm">
                   <div class="form-group">
+                     <i><input type="text" id="textname"/></i></br>
                      <label>Enter Message</label>
                      <input type="text" class="form-control" id="message"></input>
                      <br />
-                     <input type="submit" class="btn btn-primary" value="Send"/>
+                     <input type="button" class="btn btn-primary" value="Delete All" id="deleteLog"/>
+                     <input type="submit" id="send" name="send" class="btn btn-primary" value="Send"/>
+                     </br>
+                     </br>
                   </div>
                </form>
                <div class="chat" id="chat"></div>
             </div>
          </div>
+
       </div>
-
-
-      <script>
-         $(function(){
-           var socket = io.connect();
-           $('#username').click(function() {
-             $('#username').val('');
-             $('#err').val('');
-           });
-
-           $('#password').click(function() {
-             $('#password').val('');
-             $('#err').val('');
-           });
-
-           $('#messageForm').submit(function(e){
-             e.preventDefault();
-             socket.emit('send message', $('#message').val());
-             $('#message').val('');
-           });
-
-           $('#signup').click(function(){
-              var user = $('#username').val();
-              var pass = $('#password').val();
-              console.log(user);
-              console.log(pass);
-              socket.emit('new user', {'user': user, 'pass': pass}, function(data) {
-                if(data.status){
-                  $('#login').click();
-                } else {
-                  $('#err').val(data.msg);
-                }
-              });
-           });
-
-           socket.on('new message', function(data){
-             $('#chat').prepend('<div class="well"><strong>'+data.user+'</strong>: '+ data.msg+ '</div>');
-             socket.emit('insert chatlog',{'user': data.user, 'msg': data.msg});
-           });﻿
-
-           socket.on('upload log', function(data){
-             for (var i=0; i<data.length; i++) {
-               $('#chat').prepend('<div class="well"><strong>'+data[i].user+'</strong>: '+ data[i].msg+ '</div>');
-             }
-           });﻿
-
-           $('#userForm').submit(function(e) {
-             e.preventDefault();
-             socket.emit('validate user', $('#username').val(), function(data) {
-               if(data.status){
-                 $('#userFormArea').hide();
-                 $('#messageArea').show();
-                 socket.emit('load log');
-               } else {
-                 $('#err').val(data.msg);
-               }
-             });
-             $('#message').val('');
-           });
-
-           socket.on('get users', function functionName(data) {
-             var html = '';
-             for (i=0;i< data.length;i++){
-               html += '<li class="list-group-item">'+data[i]+'</li>';
-             }
-             $('#users').html(html);
-           });
-
-         });
-      </script>
+      <script src="script\client.js"></script>
    </body>
 </html>

@@ -1,0 +1,55 @@
+#messageArea{
+  margin-top: 30px;
+ display: none;
+}
+#loginFormArea {
+  margin-top: 200px;
+  text-align: center;
+}
+#loginBtn{
+  width: 12%;
+ margin-right: 30px;
+}
+#signupBtn{
+  width: 12%;
+  background-color: green;
+}
+#usernameLbl, #passwordLbl {
+  text-align: center;
+}
+label {
+  width: 30%;
+}
+#err{
+  border: 0;
+  color: red;
+  text-align: center;
+  width: 100%;
+}
+#deleteLog{
+  float: left;
+  background-color: red;
+  width: 50%;
+  border-color: red;
+  align-content: center;
+  width: 20%;
+}
+
+[name='deleteMsg'] {
+    float: left;
+
+ width: 10%;
+
+}
+
+#textname{
+  border: 0;
+}
+
+#send{
+  float: right;
+}
+
+.chatRecord{
+  border: 0;
+}
